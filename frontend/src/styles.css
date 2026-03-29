@@ -115,6 +115,24 @@ textarea {
   flex-wrap: wrap;
 }
 
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.brand-lockup__icon {
+  width: 68px;
+  height: 68px;
+  flex: 0 0 auto;
+}
+
+.brand-lockup__wordmark {
+  width: min(340px, 72vw);
+  height: auto;
+}
+
 .hero-badge {
   align-self: flex-start;
   min-width: 240px;
@@ -494,6 +512,17 @@ thead th {
   .tab-button {
     border-radius: 20px;
   }
+
+  .brand-lockup,
+  .login-brand {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .brand-lockup__wordmark,
+  .login-brand__wordmark {
+    width: min(280px, 100%);
+  }
 }
 
 .hero-badge__meta {
@@ -544,6 +573,24 @@ thead th {
 
 .login-form {
   align-self: center;
+}
+
+.login-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.login-brand__icon {
+  width: 76px;
+  height: 76px;
+  flex: 0 0 auto;
+}
+
+.login-brand__wordmark {
+  width: min(360px, 100%);
+  height: auto;
 }
 
 .login-hint {

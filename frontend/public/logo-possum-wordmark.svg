@@ -1,0 +1,55 @@
+<svg width="1240" height="360" viewBox="0 0 1240 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="wordmarkBg" x1="22" y1="26" x2="378" y2="346" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#10243B"/>
+      <stop offset="0.56" stop-color="#183654"/>
+      <stop offset="1" stop-color="#0F1B2A"/>
+    </linearGradient>
+    <linearGradient id="wordmarkGlass" x1="69" y1="48" x2="316" y2="287" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#DDEEFF" stop-opacity="0.08"/>
+    </linearGradient>
+    <linearGradient id="wordmarkScreen" x1="97" y1="78" x2="279" y2="204" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B2EBFF" stop-opacity="0.86"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.18"/>
+    </linearGradient>
+    <linearGradient id="wordmarkFur" x1="190" y1="106" x2="191" y2="260" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7FAFD"/>
+      <stop offset="1" stop-color="#CAD6E6"/>
+    </linearGradient>
+    <linearGradient id="brandText" x1="418" y1="84" x2="938" y2="280" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8FBFF"/>
+      <stop offset="1" stop-color="#CFE2F4"/>
+    </linearGradient>
+    <linearGradient id="taglineText" x1="423" y1="228" x2="908" y2="228" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFD27C"/>
+      <stop offset="1" stop-color="#8CD2FF"/>
+    </linearGradient>
+  </defs>
+  <rect x="24" y="24" width="328" height="312" rx="86" fill="url(#wordmarkBg)"/>
+  <rect x="56" y="48" width="264" height="264" rx="70" fill="url(#wordmarkGlass)" stroke="rgba(255,255,255,0.24)" stroke-width="2"/>
+  <rect x="93" y="74" width="190" height="138" rx="32" fill="url(#wordmarkScreen)" stroke="rgba(255,255,255,0.28)" stroke-width="2"/>
+  <rect x="128" y="227" width="118" height="12" rx="6" fill="#E5F1FF" fill-opacity="0.62"/>
+  <path d="M152 255H224L212 277H164L152 255Z" fill="#D2E2F5" fill-opacity="0.78"/>
+  <rect x="144" y="278" width="88" height="13" rx="6.5" fill="#F1F7FF" fill-opacity="0.72"/>
+  <path d="M143 120L126 84L98 110C103 128 114 139 130 144L143 120Z" fill="url(#wordmarkFur)"/>
+  <path d="M238 120L255 84L283 110C278 128 267 139 251 144L238 120Z" fill="url(#wordmarkFur)"/>
+  <path d="M160 141C160 112 183 89 212 89H225C254 89 277 112 277 141V185C277 214 253 238 224 238H214C184 238 160 214 160 185V141Z" fill="url(#wordmarkFur)"/>
+  <ellipse cx="194" cy="147" rx="13" ry="17" fill="#2A3343"/>
+  <ellipse cx="241" cy="147" rx="13" ry="17" fill="#2A3343"/>
+  <circle cx="198" cy="141" r="3.5" fill="#FFFFFF"/>
+  <circle cx="245" cy="141" r="3.5" fill="#FFFFFF"/>
+  <ellipse cx="219" cy="170" rx="16" ry="13" fill="#39465A"/>
+  <ellipse cx="219" cy="186" rx="31" ry="19" fill="#F8FBFF" fill-opacity="0.84"/>
+  <path d="M204 205C212 212 226 212 234 205" stroke="#4D5C70" stroke-width="5.5" stroke-linecap="round"/>
+  <path d="M211 172L203 186" stroke="#4D5C70" stroke-width="4.6" stroke-linecap="round"/>
+  <path d="M227 172L235 186" stroke="#4D5C70" stroke-width="4.6" stroke-linecap="round"/>
+  <path d="M269 220C297 226 310 244 312 269" stroke="#F4F7FB" stroke-opacity="0.88" stroke-width="7" stroke-linecap="round"/>
+  <path d="M416 145.88C416 104.374 447.549 72 491.281 72C533.349 72 559.008 95.2392 565.648 126.786H519.506C515.521 116.492 506.223 108.191 491.281 108.191C473.017 108.191 459.071 122.139 459.071 145.88C459.071 169.621 473.017 183.569 491.281 183.569C506.223 183.569 515.521 175.267 519.506 164.973H565.648C559.008 196.52 533.349 219.76 491.281 219.76C447.549 219.76 416 187.385 416 145.88Z" fill="url(#brandText)"/>
+  <path d="M589.431 218.765V75.3232H647.203C694.341 75.3232 724.894 103.377 724.894 146.875C724.894 190.372 694.341 218.765 647.203 218.765H589.431ZM632.171 182.241H645.212C666.132 182.241 681.153 170.285 681.153 146.875C681.153 123.465 666.132 111.847 645.212 111.847H632.171V182.241Z" fill="url(#brandText)"/>
+  <path d="M742.824 218.765V75.3232H786.56V218.765H742.824Z" fill="url(#brandText)"/>
+  <path d="M814.054 218.765V75.3232H855.795L911.243 146.543V75.3232H954.98V218.765H913.238L857.79 147.541V218.765H814.054Z" fill="url(#brandText)"/>
+  <path d="M981.191 218.765V75.3232H1024.93V218.765H981.191Z" fill="url(#brandText)"/>
+  <path d="M1061.58 218.765L1112.04 75.3232H1163.49L1214 218.765H1167.19L1159.89 195.856H1114.7L1107.4 218.765H1061.58ZM1125.33 162.32H1149.59L1137.45 124.135L1125.33 162.32Z" fill="url(#brandText)"/>
+  <text x="420" y="262" fill="url(#taglineText)" font-family="'DM Sans', sans-serif" font-size="34" font-weight="600" letter-spacing="0.08em">MODERN POINT OF SALE PLATFORM</text>
+</svg>

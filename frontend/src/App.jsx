@@ -53,7 +53,18 @@ export default function App() {
 
       <header className="hero-panel">
         <div>
-          <p className="eyebrow">Possum POS</p>
+          <div className="brand-lockup">
+            <img
+              alt="Possum logo"
+              className="brand-lockup__icon"
+              src="/logo-possum-icon.svg"
+            />
+            <img
+              alt="Possum wordmark"
+              className="brand-lockup__wordmark"
+              src="/logo-possum-wordmark.svg"
+            />
+          </div>
           <h1>Modern glass admin wired straight into your backend API.</h1>
           <p className="hero-copy">
             Setiap layar sudah dipetakan ke endpoint backend yang kamu bangun,
