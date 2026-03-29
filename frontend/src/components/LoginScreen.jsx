@@ -41,13 +41,11 @@ export default function LoginScreen({ onLogin }) {
               className="login-brand__icon"
               src="/logo-possum-icon.svg"
             />
-            <img
-              alt="Possum wordmark"
-              className="login-brand__wordmark"
-              src="/logo-possum-wordmark.svg"
-            />
+            <div className="login-brand__text">
+              <p className="eyebrow">Possum Access</p>
+              <strong>Sign in to manage your store.</strong>
+            </div>
           </div>
-          <p className="eyebrow">Possum Access</p>
           <h1>Masuk dulu sebelum mengelola toko.</h1>
           <p className="hero-copy">
             Ini login sementara untuk testing frontend. Nanti bisa diganti ke

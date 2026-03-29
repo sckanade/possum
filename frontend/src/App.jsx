@@ -5,6 +5,7 @@ import SalesSection from "./sections/SalesSection";
 import ProfileSection from "./sections/ProfileSection";
 import { API_BASE_URL } from "./services/http";
 import LoginScreen from "./components/LoginScreen";
+import { getProfile } from "./services/profileApi";
 
 const tabs = [
   { id: "dashboard", label: "Dashboard", description: "Realtime sales pulse" },
@@ -16,6 +17,7 @@ const tabs = [
 export default function App() {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [session, setSession] = useState(null);
+  const [storeName, setStoreName] = useState("Possum POS");
 
   useEffect(() => {
     const savedSession = window.sessionStorage.getItem("possum-auth");
@@ -29,6 +31,21 @@ export default function App() {
     } catch (_error) {
       window.sessionStorage.removeItem("possum-auth");
     }
+  }, []);
+
+  useEffect(() => {
+    async function loadStoreProfile() {
+      try {
+        const profile = await getProfile();
+        if (profile?.storeName) {
+          setStoreName(profile.storeName);
+        }
+      } catch (_error) {
+        // Keep fallback store name if profile has not been created yet.
+      }
+    }
+
+    loadStoreProfile();
   }, []);
 
   function handleLogin(payload) {
@@ -59,13 +76,12 @@ export default function App() {
               className="brand-lockup__icon"
               src="/logo-possum-icon.svg"
             />
-            <img
-              alt="Possum wordmark"
-              className="brand-lockup__wordmark"
-              src="/logo-possum-wordmark.svg"
-            />
+            <div className="brand-lockup__text">
+              <p className="eyebrow">Possum</p>
+              <strong>Store operations, inventory, and sales in one place.</strong>
+            </div>
           </div>
-          <h1>Modern glass admin wired straight into your backend API.</h1>
+          <h1>{storeName}</h1>
           <p className="hero-copy">
             Setiap layar sudah dipetakan ke endpoint backend yang kamu bangun,
             jadi dashboard ke dashboard, produk ke produk, sales ke sales.
@@ -73,17 +89,17 @@ export default function App() {
           <div className="hero-actions">
             <button
               className="primary-button"
-              onClick={() => setActiveTab("products")}
-              type="button"
-            >
-              Tambah produk
-            </button>
-            <button
-              className="ghost-button"
               onClick={() => setActiveTab("sales")}
               type="button"
             >
               Buka kasir
+            </button>
+            <button
+              className="ghost-button"
+              onClick={() => setActiveTab("products")}
+              type="button"
+            >
+              Tambah produk
             </button>
           </div>
         </div>

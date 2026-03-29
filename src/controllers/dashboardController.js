@@ -32,7 +32,8 @@ const getTodaySales = asyncHandler(async (_req, res) => {
 });
 
 const getWeeklySales = asyncHandler(async (_req, res) => {
-  const start = startOfWeek();
+  const start = startOfDay();
+  start.setDate(start.getDate() - 6);
   const end = endOfDay();
 
   const sales = await Sale.findAll({
@@ -49,13 +50,29 @@ const getWeeklySales = asyncHandler(async (_req, res) => {
     order: [literal("day ASC")]
   });
 
+  const salesMap = new Map(
+    sales.map((item) => [
+      new Date(item.get("day")).toISOString().slice(0, 10),
+      Number(item.get("totalSales"))
+    ])
+  );
+
+  const dailySales = [];
+  for (let index = 0; index < 7; index += 1) {
+    const date = new Date(start);
+    date.setDate(start.getDate() + index);
+    const isoDate = date.toISOString().slice(0, 10);
+
+    dailySales.push({
+      day: `${isoDate}T00:00:00.000Z`,
+      totalSales: salesMap.get(isoDate) || 0
+    });
+  }
+
   res.json({
     startDate: start.toISOString(),
     endDate: end.toISOString(),
-    dailySales: sales.map((item) => ({
-      day: item.get("day"),
-      totalSales: Number(item.get("totalSales"))
-    }))
+    dailySales
   });
 });
 
