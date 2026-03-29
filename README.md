@@ -9,6 +9,16 @@ This repository contains the first working product scaffold for Possum, includin
 - product, category, sales, dashboard, and store profile flows
 - basic forecasting for sales trend visualization
 
+## Screenshots
+
+### Dashboard
+
+![Possum dashboard](./screenshots/dashboard.png)
+
+### Checkout
+
+![Possum checkout](./screenshots/checkout.png)
+
 ## Overview
 
 Possum is designed for small and growing retail businesses that need a clean operational hub for:
