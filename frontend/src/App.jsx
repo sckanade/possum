@@ -18,6 +18,9 @@ export default function App() {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [session, setSession] = useState(null);
   const [storeName, setStoreName] = useState("Possum POS");
+  const [panelDescription, setPanelDescription] = useState(
+    "Setiap layar sudah dipetakan ke endpoint backend yang kamu bangun, jadi dashboard ke dashboard, produk ke produk, sales ke sales."
+  );
 
   useEffect(() => {
     const savedSession = window.sessionStorage.getItem("possum-auth");
@@ -39,6 +42,9 @@ export default function App() {
         const profile = await getProfile();
         if (profile?.storeName) {
           setStoreName(profile.storeName);
+        }
+        if (profile?.panelDescription) {
+          setPanelDescription(profile.panelDescription);
         }
       } catch (_error) {
         // Keep fallback store name if profile has not been created yet.
@@ -74,18 +80,11 @@ export default function App() {
             <img
               alt="Possum logo"
               className="brand-lockup__icon"
-              src="/logo-possum-icon.svg"
+              src="/logo-possum-clean.png"
             />
-            <div className="brand-lockup__text">
-              <p className="eyebrow">Possum</p>
-              <strong>Store operations, inventory, and sales in one place.</strong>
-            </div>
           </div>
           <h1>{storeName}</h1>
-          <p className="hero-copy">
-            Setiap layar sudah dipetakan ke endpoint backend yang kamu bangun,
-            jadi dashboard ke dashboard, produk ke produk, sales ke sales.
-          </p>
+          <p className="hero-copy">{panelDescription}</p>
           <div className="hero-actions">
             <button
               className="primary-button"
@@ -134,7 +133,19 @@ export default function App() {
         {activeTab === "dashboard" ? <DashboardSection /> : null}
         {activeTab === "products" ? <ProductsSection /> : null}
         {activeTab === "sales" ? <SalesSection /> : null}
-        {activeTab === "profile" ? <ProfileSection /> : null}
+        {activeTab === "profile" ? (
+          <ProfileSection
+            onProfileUpdated={(profile) => {
+              if (profile?.storeName) {
+                setStoreName(profile.storeName);
+              }
+              setPanelDescription(
+                profile?.panelDescription ||
+                  "Setiap layar sudah dipetakan ke endpoint backend yang kamu bangun, jadi dashboard ke dashboard, produk ke produk, sales ke sales."
+              );
+            }}
+          />
+        ) : null}
       </main>
     </div>
   );

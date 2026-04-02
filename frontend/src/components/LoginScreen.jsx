@@ -39,12 +39,8 @@ export default function LoginScreen({ onLogin }) {
             <img
               alt="Possum icon"
               className="login-brand__icon"
-              src="/logo-possum-icon.svg"
+              src="/logo-possum-clean.png"
             />
-            <div className="login-brand__text">
-              <p className="eyebrow">Possum Access</p>
-              <strong>Sign in to manage your store.</strong>
-            </div>
           </div>
           <h1>Masuk dulu sebelum mengelola toko.</h1>
           <p className="hero-copy">

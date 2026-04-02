@@ -118,26 +118,12 @@ textarea {
 .brand-lockup {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 
 .brand-lockup__icon {
-  width: 68px;
-  height: 68px;
-  flex: 0 0 auto;
-}
-
-.brand-lockup__text {
-  display: grid;
-  gap: 6px;
-}
-
-.brand-lockup__text strong,
-.login-brand__text strong {
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 1.05rem;
-  color: rgba(247, 244, 236, 0.92);
+  width: min(320px, 62vw);
+  height: auto;
 }
 
 .hero-badge {
@@ -387,6 +373,7 @@ textarea {
 }
 
 .line-chart {
+  position: relative;
   display: grid;
   gap: 14px;
 }
@@ -411,6 +398,46 @@ textarea {
 .line-chart__labels span {
   color: rgba(247, 244, 236, 0.72);
   font-size: 0.9rem;
+}
+
+.forecast-tooltip {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 2;
+  display: grid;
+  gap: 6px;
+  min-width: 180px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 18px 40px rgba(4, 10, 20, 0.22);
+}
+
+.forecast-tooltip__type {
+  color: rgba(247, 244, 236, 0.7);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.forecast-tooltip strong {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.2rem;
+  color: #fff7ea;
+}
+
+.forecast-tooltip small {
+  color: rgba(247, 244, 236, 0.78);
 }
 
 .legend-dot {
@@ -452,7 +479,8 @@ textarea {
 }
 
 .form-grid input,
-.form-grid select {
+.form-grid select,
+.form-grid textarea {
   width: 100%;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 16px;
@@ -463,9 +491,21 @@ textarea {
 }
 
 .form-grid input:focus,
-.form-grid select:focus {
+.form-grid select:focus,
+.form-grid textarea:focus {
   border-color: rgba(255, 221, 154, 0.56);
   box-shadow: 0 0 0 4px rgba(255, 206, 115, 0.12);
+}
+
+.form-grid textarea {
+  resize: vertical;
+  min-height: 108px;
+}
+
+.field-hint {
+  color: rgba(247, 244, 236, 0.62);
+  font-size: 0.85rem;
+  line-height: 1.45;
 }
 
 .primary-button {
@@ -674,19 +714,12 @@ thead th {
 .login-brand {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 
 .login-brand__icon {
-  width: 76px;
-  height: 76px;
-  flex: 0 0 auto;
-}
-
-.login-brand__text {
-  display: grid;
-  gap: 6px;
+  width: min(360px, 100%);
+  height: auto;
 }
 
 .login-hint {
