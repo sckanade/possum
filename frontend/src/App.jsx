@@ -111,6 +111,7 @@ export default function App() {
             <button className="ghost-button" onClick={handleLogout} type="button">
               Logout
             </button>
+            <small className="build-badge">{__APP_VERSION__}</small>
           </div>
         </div>
       </header>

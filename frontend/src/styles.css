@@ -667,6 +667,13 @@ thead th {
   margin-top: 18px;
 }
 
+.build-badge {
+  color: rgba(247, 244, 236, 0.58);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 .login-shell {
   position: relative;
   min-height: 100vh;
