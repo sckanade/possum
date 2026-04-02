@@ -50,6 +50,7 @@ function BarChart({ items, labelKey, valueKey }) {
 }
 
 function LineChart({ actual, forecast }) {
+  const [hoveredPoint, setHoveredPoint] = useState(null);
   const points = [
     ...actual.map((entry) => ({
       label: formatShortDate(entry.date),
@@ -148,18 +149,30 @@ function LineChart({ actual, forecast }) {
 
         {coordinates.map((point) => (
           <g key={`${point.label}-${point.type}`}>
-            <title>{`${point.tooltipLabel} - ${formatCurrency(point.value)}`}</title>
             <circle
               cx={point.x}
               cy={point.y}
               fill={point.type === "actual" ? "#ffd88e" : "#9dffe0"}
               r="5"
+              onMouseEnter={() => setHoveredPoint(point)}
+              onMouseLeave={() => setHoveredPoint(null)}
               stroke="rgba(19,34,56,0.85)"
               strokeWidth="2"
+              style={{ cursor: "pointer" }}
             />
           </g>
         ))}
       </svg>
+
+      {hoveredPoint ? (
+        <div className="forecast-tooltip" role="dialog" aria-label="Forecast detail">
+          <span className="forecast-tooltip__type">
+            {hoveredPoint.type === "forecast" ? "Forecast omzet" : "Omzet aktual"}
+          </span>
+          <strong>{formatCurrency(hoveredPoint.value)}</strong>
+          <small>{hoveredPoint.tooltipLabel}</small>
+        </div>
+      ) : null}
 
       <div className="line-chart__legend">
         <span><i className="legend-dot legend-dot--actual" />Aktual</span>
@@ -382,23 +395,13 @@ export default function DashboardSection() {
         </GlassCard>
       </div>
 
-      <GlassCard eyebrow="Regression model" title="Forecast">
+      <GlassCard eyebrow="Forecast Penjualan" title="Proyeksi Omzet Beberapa Hari Ke Depan">
         {loading ? (
           <p className="muted">Menghitung prediksi...</p>
         ) : error ? (
           <p className="error-text">{error}</p>
         ) : (
-          <div className="section-stack">
-            <LineChart actual={forecast.history} forecast={forecast.future} />
-            <div className="forecast-list">
-              {forecast.future.map((entry) => (
-                <div className="forecast-pill" key={entry.date}>
-                  <span>{formatShortDate(entry.date)}</span>
-                  <strong>{formatCurrency(entry.predictedValue)}</strong>
-                </div>
-              ))}
-            </div>
-          </div>
+          <LineChart actual={forecast.history} forecast={forecast.future} />
         )}
       </GlassCard>
     </div>
