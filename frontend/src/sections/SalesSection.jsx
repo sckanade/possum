@@ -7,6 +7,7 @@ import { createSale, getSales } from "../services/salesApi";
 export default function SalesSection() {
   const [products, setProducts] = useState([]);
   const [sales, setSales] = useState([]);
+  const [selectedSale, setSelectedSale] = useState(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
@@ -57,8 +58,13 @@ export default function SalesSection() {
       setError("");
       setMessage("");
 
+      const normalizedCustomer = {
+        name: customer.name.trim() || "anon",
+        phoneNumber: customer.phoneNumber.trim() || "+620000000000"
+      };
+
       const response = await createSale({
-        customer,
+        customer: normalizedCustomer,
         items: [
           {
             productId: saleForm.productId,
@@ -72,6 +78,10 @@ export default function SalesSection() {
       setMessage(
         `Transaksi ${response.sale.invoiceNumber} berhasil diproses.`
       );
+      setCustomer({
+        name: "",
+        phoneNumber: ""
+      });
       setSaleForm((current) => ({
         ...current,
         quantity: 1
@@ -99,7 +109,6 @@ export default function SalesSection() {
                   }))
                 }
                 placeholder="Budi"
-                required
               />
             </label>
             <label>
@@ -113,7 +122,6 @@ export default function SalesSection() {
                   }))
                 }
                 placeholder="whatsapp:+6281234567890"
-                required
               />
             </label>
             <label>
@@ -200,10 +208,91 @@ export default function SalesSection() {
               </div>
               <strong>{formatCurrency(sale.total)}</strong>
               <span>{formatDate(sale.soldAt)}</span>
+              <button
+                className="ghost-button"
+                onClick={() => setSelectedSale(sale)}
+                type="button"
+              >
+                Lihat detail
+              </button>
             </article>
           ))}
         </div>
       </GlassCard>
+
+      {selectedSale ? (
+        <div
+          className="dialog-backdrop"
+          onClick={() => setSelectedSale(null)}
+          role="presentation"
+        >
+          <section
+            aria-label="Detail transaksi"
+            className="dialog-panel"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="dialog-panel__header">
+              <div>
+                <p className="eyebrow">Transaction detail</p>
+                <h2>{selectedSale.invoiceNumber}</h2>
+              </div>
+              <button
+                className="ghost-button"
+                onClick={() => setSelectedSale(null)}
+                type="button"
+              >
+                Tutup
+              </button>
+            </div>
+
+            <div className="stack-list">
+              <div className="list-item">
+                <span>Pelanggan</span>
+                <strong>{selectedSale.customer?.name || "anon"}</strong>
+              </div>
+              <div className="list-item">
+                <span>WhatsApp</span>
+                <strong>{selectedSale.customer?.phoneNumber || "+620000000000"}</strong>
+              </div>
+              <div className="list-item">
+                <span>Metode pembayaran</span>
+                <strong>{selectedSale.paymentMethod}</strong>
+              </div>
+              <div className="list-item">
+                <span>Waktu</span>
+                <strong>{formatDate(selectedSale.soldAt)}</strong>
+              </div>
+              <div className="list-item">
+                <span>Total</span>
+                <strong>{formatCurrency(selectedSale.total)}</strong>
+              </div>
+            </div>
+
+            <div className="table-shell">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Produk</th>
+                    <th>Qty</th>
+                    <th>Harga</th>
+                    <th>Subtotal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {(selectedSale.items || []).map((item) => (
+                    <tr key={item.id}>
+                      <td>{item.product?.name || item.productId}</td>
+                      <td>{item.quantity}</td>
+                      <td>{formatCurrency(item.unitPrice)}</td>
+                      <td>{formatCurrency(item.subtotal)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      ) : null}
     </div>
   );
 }

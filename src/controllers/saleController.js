@@ -7,6 +7,21 @@ const { validateRequired } = require("../middlewares/validate");
 const { invoiceNumber } = require("../utils/ids");
 const { sendPurchaseNotification } = require("../services/whatsappService");
 
+const DEFAULT_CUSTOMER_NAME = "anon";
+const DEFAULT_PHONE_NUMBER = "+620000000000";
+
+function normalizeCustomerPayload(customer = {}) {
+  const normalizedName = String(customer.name || "").trim() || DEFAULT_CUSTOMER_NAME;
+  const normalizedPhone = String(customer.phoneNumber || "").trim() || DEFAULT_PHONE_NUMBER;
+  const isDefaultPhone = normalizedPhone === DEFAULT_PHONE_NUMBER;
+
+  return {
+    name: normalizedName,
+    phoneNumber: normalizedPhone,
+    whatsappOptIn: isDefaultPhone ? false : customer.whatsappOptIn ?? true
+  };
+}
+
 const saleInclude = [
   { model: Customer, as: "customer" },
   {
@@ -39,25 +54,36 @@ const getSale = asyncHandler(async (req, res) => {
 
 const createSale = asyncHandler(async (req, res) => {
   validateRequired(["customer", "items"], req.body);
-  validateRequired(["phoneNumber"], req.body.customer);
 
   if (!Array.isArray(req.body.items) || req.body.items.length === 0) {
     throw new AppError(400, "Sale items must be a non-empty array");
   }
 
+  const normalizedCustomer = normalizeCustomerPayload(req.body.customer);
+
   const result = await sequelize.transaction(async (transaction) => {
     let customer = await Customer.findOne({
-      where: { phoneNumber: req.body.customer.phoneNumber },
+      where: { phoneNumber: normalizedCustomer.phoneNumber },
       transaction
     });
 
     if (!customer) {
-      validateRequired(["name", "phoneNumber"], req.body.customer);
       customer = await Customer.create(
         {
-          name: req.body.customer.name,
-          phoneNumber: req.body.customer.phoneNumber,
-          whatsappOptIn: req.body.customer.whatsappOptIn ?? true
+          name: normalizedCustomer.name,
+          phoneNumber: normalizedCustomer.phoneNumber,
+          whatsappOptIn: normalizedCustomer.whatsappOptIn
+        },
+        { transaction }
+      );
+    } else if (
+      customer.name !== normalizedCustomer.name ||
+      customer.whatsappOptIn !== normalizedCustomer.whatsappOptIn
+    ) {
+      await customer.update(
+        {
+          name: normalizedCustomer.name,
+          whatsappOptIn: normalizedCustomer.whatsappOptIn
         },
         { transaction }
       );
